@@ -112,11 +112,13 @@ namespace Sngty
             int bytesRead;
             string accumulatedData = "";
             string lastMessage = "";
-
+            
             while (tcpClient != null && tcpClient.Connected)
             {
+                
                 if (tcpStream.DataAvailable)
                 {
+                    Debug.Log(tcpStream.DataAvailable);
                     bytesRead = await tcpStream.ReadAsync(buffer, 0, buffer.Length);
                     string message = System.Text.Encoding.ASCII.GetString(buffer, 0, bytesRead);
                     accumulatedData += message;
