@@ -33,6 +33,8 @@ namespace Sngty
         public string clientIP;
         public int clientPort = 80;
 
+        [Header("Message Filtering")]
+        public string targetMessage = ""; // The specific string to wait for
 
         private TcpClient tcpClient;
         private NetworkStream tcpStream;

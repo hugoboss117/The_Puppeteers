@@ -15143,6 +15143,37 @@ Transform:
   - {fileID: 1186750992}
   m_Father: {fileID: 291327033}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &675944218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675944219}
+  m_Layer: 0
+  m_Name: logic2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &675944219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675944218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.867972, y: 3.2739515, z: 4.1844673}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &677369404
 GameObject:
   m_ObjectHideFlags: 0
@@ -36320,7 +36351,7 @@ Transform:
   m_GameObject: {fileID: 1751179231}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 0, z: 1.3}
+  m_LocalPosition: {x: 5.56, y: 0, z: 8.39}
   m_LocalScale: {x: 1.8707274, y: 1.8707274, z: 1.8707274}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41022,13 +41053,26 @@ MonoBehaviour:
       m_Calls: []
   onMessageRecieved:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8004558135856437178}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: B1door
+          m_BoolArgument: 1
+        m_CallState: 2
   onError:
     m_PersistentCalls:
       m_Calls: []
   connectionType: 1
   clientIP: 192.168.4.1
   clientPort: 80
+  targetMessage: B1
 --- !u!1 &1951099517
 GameObject:
   m_ObjectHideFlags: 0
@@ -42287,7 +42331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2004508677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42314,7 +42358,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: B1door
+            m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
 --- !u!4 &2004508678
@@ -46505,3 +46549,4 @@ SceneRoots:
   - {fileID: 309681807}
   - {fileID: 1323492295}
   - {fileID: 1981259158}
+  - {fileID: 675944219}
