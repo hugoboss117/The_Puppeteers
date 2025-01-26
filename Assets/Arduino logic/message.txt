@@ -1,0 +1,123 @@
+#include <WiFi.h>
+#include <Adafruit_NeoPixel.h>
+
+// Pin where the Din of the LED strip is connected
+#define LED_PIN 3  // Change this to the pin you are using
+#define BUTTON_PIN_1 4  // The ESP32 pin GPIO25 connected to the button 1
+#define BUTTON_PIN_2 5  // The ESP32 pin GPIO26 connected to the button 2
+#define BUTTON_PIN_3 6  // The ESP32 pin GPIO27 connected to the button 3
+#define BUTTON_PIN_4 7  // The ESP32 pin GPIO14 connected to the button 4
+// Number of LEDs in your strip
+#define NUM_LEDS 35
+
+// Create an instance of Adafruit_NeoPixel
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+const char* ssid = "Hamza";
+const char* password = "12345678";
+
+// Initializes the button variable:
+int lastState1 = HIGH; // the previous state from the input pin
+int currentState1;     // the current reading from the input pin
+
+int lastState2 = HIGH; // the previous state from the input pin
+int currentState2;     // the current reading from the input pin
+
+int lastState3 = HIGH; // the previous state from the input pin
+int currentState3;     // the current reading from the input pin
+
+int lastState4 = HIGH; // the previous state from the input pin
+int currentState4;     // the current reading from the input pin
+
+WiFiServer server(80);
+
+void setup() {
+  strip.begin();   // Initialize the LED strip
+  strip.show();    // Turn off all LEDs to start
+  Serial.begin(115200);
+
+  pinMode(BUTTON_PIN_1, INPUT_PULLUP);
+  pinMode(BUTTON_PIN_2, INPUT_PULLUP);
+  pinMode(BUTTON_PIN_3, INPUT_PULLUP);
+  pinMode(BUTTON_PIN_4, INPUT_PULLUP);
+  // Create Access Point
+  WiFi.softAP(ssid, password);
+  Serial.println("Access Point Started");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.softAPIP());
+
+  server.begin();
+}
+
+void loop() {
+  WiFiClient client = server.available(); // Check for an incoming client
+  if (client) {
+    Serial.println("Client connected!");
+    client.println("SHello WorldE");
+
+    int sendIndex = 0;    
+
+    while (client.connected()) { // Keep the connection open
+      //if (sendIndex == 2) {
+        String message = client.readStringUntil('\n');
+        Serial.print("Received: ");
+        Serial.println(message);
+        int ledTarget = message.toInt();
+        //sendIndex = 0;
+      //} else sendIndex++;
+      
+      // read the state of the switch/button:
+      currentState1 = digitalRead(BUTTON_PIN_1);
+      currentState2 = digitalRead(BUTTON_PIN_2);
+      currentState3 = digitalRead(BUTTON_PIN_3);
+      currentState4 = digitalRead(BUTTON_PIN_4);
+      
+
+      //if(lastState == LOW && currentState == HIGH) {
+        if(lastState1 == LOW && currentState1 == HIGH) {
+        Serial.println("Button BSent");
+        client.println("SB1E"); // send message to Unity/Quest
+        Serial.println("Button ASent");
+      }
+
+        if(lastState2 == LOW && currentState2 == HIGH) {
+        Serial.println("Button BSent");
+        client.println("SB2E"); // send message to Unity/Quest
+        Serial.println("Button ASent");
+      }
+
+        if(lastState3 == LOW && currentState3 == HIGH) {
+        Serial.println("Button BSent");
+        client.println("SB3E"); // send message to Unity/Quest
+        Serial.println("Button ASent");
+      }
+
+        if(lastState4 == LOW && currentState4 == HIGH) {
+        Serial.println("Button BSent");
+        client.println("SB4E"); // send message to Unity/Quest
+        Serial.println("Button ASent");
+      }
+
+      // save the last state
+      lastState1 = currentState1;
+      lastState2 = currentState2;
+      lastState3 = currentState3;
+      lastState4 = currentState4;
+
+
+      if (ledTarget != 0) {
+        ledTarget = ledTarget - 1;
+        strip.clear(); // Turn off all LEDs
+        strip.setPixelColor(ledTarget, strip.Color(255, 0, 0)); // Light up the selected LED in red
+        strip.show();
+        Serial.println("Turned on LED " + String(ledTarget));
+      //client.println("Turned on LED " + String(ledTarget));    
+      }  
+      
+
+    }
+
+    Serial.println("Client disconnected.");
+    client.stop(); // Close the connection
+  }
+}
